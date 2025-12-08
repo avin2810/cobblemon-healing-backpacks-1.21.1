@@ -1,5 +1,6 @@
 package net.avin2810.cobblemonhealingbackpacks;
 
+import net.avin2810.cobblemonhealingbackpacks.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -20,5 +21,6 @@ public class CobblemonHealingBackpacks implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		ModItems.registerModItems();
 	}
 }
