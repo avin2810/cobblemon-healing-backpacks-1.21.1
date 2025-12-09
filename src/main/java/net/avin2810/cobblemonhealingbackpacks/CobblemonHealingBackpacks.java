@@ -29,20 +29,21 @@ public class CobblemonHealingBackpacks implements ModInitializer {
 		});
 	}
 
-	private static void healParty(ServerPlayerEntity player) {
+	public static void healParty(ServerPlayerEntity player) {
 		if (player == null || player.getServer() == null) {
 			return;
 		}
 
+		if (!HealUpgradeHelper.playerHasHealUpgrade(player)) {
+			LOGGER.info("Player {} tried to heal without Cobblemon heal upgrade.",
+					player.getGameProfile().getName());
+			return;
+		}
 		String playerName = player.getName().getString();
-		String command = "healpokemon " + playerName;
+		if (HealUpgradeHelper.playerHasHealUpgrade(player)) {
+			healParty(player);
+		}
 
-		ServerCommandSource source = player.getServer()
-				.getCommandSource()
-				.withEntity(player)
-				.withLevel(4); // high permission level
-
-		player.getServer().getCommandManager().executeWithPrefix(source, command);
 		LOGGER.info("CobblemonHealingBackpacks: healed party for {}", playerName);
 	}
 }
